@@ -12,7 +12,7 @@ import re
 st.set_page_config(page_title="AI Support Portal", layout="wide")
 
 # Dost ki ya nayi API Key yahan dalo
-API_KEY = "AIzaSyB6L2om3scZ8BTOH0aRqoXUq81TVhSz1IQ"
+API_KEY = "AIzaSyB1pTHRm026Jpo1g4z3Ao2Rmtepp0jH1QY"
 client = genai.Client(api_key=API_KEY)
 
 # --- 2. Load ML Models ---
@@ -103,7 +103,7 @@ if st.button("Generate Personalized Response"):
                     """
                     
                     response = client.models.generate_content(
-                        model="gemini-2.0-flash-lite", 
+                        model="gemini-2.5-flash", 
                         contents=prompt
                     )
                     
