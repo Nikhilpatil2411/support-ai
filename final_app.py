@@ -12,7 +12,7 @@ import re
 st.set_page_config(page_title="AI Support Portal", layout="wide")
 
 # Dost ki ya nayi API Key yahan dalo
-API_KEY = ""
+API_KEY = "AIzaSyB2Rz4pCPTfA6yp-fxSVLMKXN1RtqQML4g"
 client = genai.Client(api_key=API_KEY)
 
 # --- 2. Load ML Models ---
