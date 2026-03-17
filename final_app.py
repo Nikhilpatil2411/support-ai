@@ -1,6 +1,3 @@
-
-
-
 import streamlit as st
 import joblib
 from google import genai
@@ -17,6 +14,7 @@ st.set_page_config(page_title="AI Support Portal", layout="wide")
 API_KEY = os.getenv("GOOGLE_API_KEY")
 client = genai.Client(api_key=API_KEY)
 
+
 # --- 2. Load ML Models ---
 @st.cache_resource
 def load_models():
@@ -28,7 +26,9 @@ def load_models():
         st.error(f"Model Load Error: {e}")
         return None, None
 
+
 classifier, vectorizer = load_models()
+
 
 # --- 3. Extraction & Email Regex Function ---
 def get_text_from_file(uploaded_file):
@@ -45,10 +45,11 @@ def get_text_from_file(uploaded_file):
         st.error(f"File Reading Error: {e}")
         return ""
 
+
 def extract_email(text):
-    # Yeh function text mein se email dhoond lega
     match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', text)
     return match.group(0) if match else None
+
 
 # --- 4. UI Layout ---
 st.title("🤖 AI Customer Support System")
@@ -90,29 +91,29 @@ if st.button("Generate Personalized Response"):
                 issue_vec = vectorizer.transform([user_issue.lower()])
                 category = classifier.predict(issue_vec)[0]
                 st.info(f"**Detected Category:** {category}")
-                
-                # 2. AI Generation (Using 2.0-flash-lite for better quota)
+
+                # 2. AI Generation
                 with st.spinner("AI draft taiyar kar raha hai..."):
                     prompt = f"""
-                    You are a professional support agent. 
+                    You are a professional support agent.
                     Customer Email: {customer_email}
                     Issue Category: {category}
                     Current Issue: {user_issue}
-                    
-                    Task: Write a professional email response to the customer. 
-                    Address them by their email prefix if name is unknown. 
+
+                    Task: Write a professional email response to the customer.
+                    Address them by their email prefix if name is unknown.
                     Be empathetic and provide a solution for the {category} issue.
                     """
-                    
+
                     response = client.models.generate_content(
-                        model="gemini-2.5-flash", 
+                        model="gemini-2.5-flash",
                         contents=prompt
                     )
-                    
+
                     st.subheader("AI Drafted Response:")
                     st.code(response.text, language="markdown")
                     st.success(f"Draft ready for {customer_email}!")
-                    
+
             except Exception as e:
                 st.error(f"Generation Error: {e}")
         else:
