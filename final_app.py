@@ -7,8 +7,9 @@ from google import genai
 import PyPDF2
 from docx import Document
 import re
+import os
 
-# --- 1. Settings & API Setup ---
+# --- 1. Settings & API Setup ---s
 st.set_page_config(page_title="AI Support Portal", layout="wide")
 
 # Dost ki ya nayi API Key yahan dalo
