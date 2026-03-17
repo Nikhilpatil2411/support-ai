@@ -3,17 +3,18 @@
 
 import streamlit as st
 import joblib
-from google import genai 
+from google import genai
 import PyPDF2
 from docx import Document
 import re
 import os
+from dotenv import load_dotenv
 
-# --- 1. Settings & API Setup ---s
+# --- 1. Settings & API Setup ---
+load_dotenv()
 st.set_page_config(page_title="AI Support Portal", layout="wide")
 
-# Dost ki ya nayi API Key yahan dalo
-API_KEY = "AIzaSyB2Rz4pCPTfA6yp-fxSVLMKXN1RtqQML4g"
+API_KEY = os.getenv("GOOGLE_API_KEY")
 client = genai.Client(api_key=API_KEY)
 
 # --- 2. Load ML Models ---

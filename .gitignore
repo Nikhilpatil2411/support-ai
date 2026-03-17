@@ -1,7 +1,5 @@
+.env
 customer_support_tickets_200k.csv
 __pycache__
 *.pyc
 .venv
-.env
-.git
-.github
